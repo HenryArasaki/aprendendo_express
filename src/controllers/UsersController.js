@@ -1,7 +1,7 @@
 class UsersController {
     create(request, response) {
         const { name, email, password } = request.body
-        response.json(`Usuario: ${name}. E-mail: ${email}. Senha: ${password}`)
+        response.status(201).json(`Usuario: ${name}. E-mail: ${email}. Senha: ${password}`)
     }
 }
 
