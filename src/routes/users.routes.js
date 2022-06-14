@@ -9,13 +9,11 @@ const usersController = new UsersController()
 
 function myMiddleware(request,response,next){
     console.log("middleware")
-    if(!request.body.isAdmin){
-        return response.json({message: "usuario não autorizado"})
-    }
     next()
 }
 
 
 usersRoutes.post("/", myMiddleware,usersController.create)
+usersRoutes.put("/:id", myMiddleware,usersController.update)
 
 module.exports = usersRoutes
