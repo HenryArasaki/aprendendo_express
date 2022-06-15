@@ -8,7 +8,7 @@ const usersController = new UsersController()
 
 
 function myMiddleware(request,response,next){
-    console.log("middleware")
+    console.log("middleware - users")
     next()
 }
 
