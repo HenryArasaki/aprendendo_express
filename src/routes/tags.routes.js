@@ -2,18 +2,17 @@ const {Router} = require("express")
 
 const TagsController = require("../controllers/TagsController")
 
+const ensureAuthenticated = require("../middleware/ensureAuthenticated")
+
 const tagsRoutes = Router()
 
 const tagsController = new TagsController() 
 
 
-function myMiddleware(request,response,next){
-    console.log("middleware - tags")
-    next()
-}
 
 
-tagsRoutes.get("/:user_id", myMiddleware,tagsController.index)
+
+tagsRoutes.get("/", ensureAuthenticated,tagsController.index)
 
 
 

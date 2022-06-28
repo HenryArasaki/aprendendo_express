@@ -6,17 +6,16 @@ const notesRoutes = Router()
 
 const notesController = new NotesController() 
 
-
-function myMiddleware(request,response,next){
-    console.log("middleware - notes")
-    next()
-}
+const ensureAuthenticated = require("../middleware/ensureAuthenticated")
 
 
-notesRoutes.post("/:user_id", myMiddleware,notesController.create)
-notesRoutes.get("/:id", myMiddleware,notesController.show)
-notesRoutes.delete("/:id", myMiddleware,notesController.delete)
-notesRoutes.get("/", myMiddleware,notesController.index)
+notesRoutes.use(ensureAuthenticated)
+
+
+notesRoutes.post("/", notesController.create)
+notesRoutes.get("/:id", notesController.show)
+notesRoutes.delete("/:id", notesController.delete)
+notesRoutes.get("/", notesController.index)
 
 
 
